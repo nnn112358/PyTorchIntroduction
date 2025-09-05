@@ -1,7 +1,7 @@
-""" 本代码仅供参考
+""" 本コードは参考例です。
 """
 
-# jit.trace函数的签名
+# jit.trace 関数のシグネチャ
 torch.jit.trace(func, example_inputs, optimize=None, 
                 check_trace=True, check_inputs=None, check_tolerance=1e-5)
 
@@ -17,7 +17,7 @@ class Mod(nn.Module):
 
 ret = torch.jit.trace(func, torch.randn(3,3))
 print(ret.graph)
-# 打印出的值：
+# 出力値：
 # graph(%a : Float(3, 3)):
 #   %1 : int = prim::Constant[value=2]() 
 #   %2 : Float(3, 3) = aten::pow(%a, %1)
@@ -28,7 +28,7 @@ print(ret.graph)
 m = Mod()
 ret = torch.jit.trace(m, torch.randn(3,3))
 print(ret.graph)
-# 打印出的值：
+# 出力値：
 # graph(%self : ClassType<Mod>,
 #       %a : Float(3, 3)):
 #   %2 : int = prim::Constant[value=2](), scope: Mod #
@@ -38,7 +38,7 @@ print(ret.graph)
 #   %6 : Float(3, 3) = aten::add(%3, %4, %5), scope: Mod
 #   return (%6)
 
-# jit.trace_module函数的签名
+# jit.trace_module 関数のシグネチャ
 torch.jit.trace_module(mod, inputs, optimize=None, check_trace=True,
                        check_inputs=None, check_tolerance=1e-5)
 
@@ -55,16 +55,16 @@ class Mod(nn.Module):
 trace_input = {"forward": torch.randn(3,3), "square": torch.randn(3,3)}
 m = Mod()
 ret = torch.jit.trace_module(m, trace_input)
-print(ret.forward.graph) # 和前面的torch.jit.trace函数输出的结果相同
+print(ret.forward.graph) # 上の torch.jit.trace 関数と同じ出力
 print(ret.square.graph)
-# 打印出的值：
+# 出力値：
 # graph(%self : ClassType<Mod>,
 #       %a : Float(3, 3)):
 #  %2 : int = prim::Constant[value=2]() #  %3 : Float(3, 3) = aten::pow(%a, %2)
 #  return (%3)
 
-# 使用torch.jit.script方法进行修饰
-# 也可以使用 @torch.jit.script 对函数进行装饰
+# torch.jit.script で装飾
+# またはデコレータ @torch.jit.script を使用
 def func(a):
     if a.norm() > 1.0:
         return a.abs()
@@ -73,7 +73,7 @@ def func(a):
 
 ret = torch.jit.script(func)
 print(ret.graph)
-# 打印出的值：
+# 出力値：
 # graph(%a.1 : Tensor):
 #   %4 : float = prim::Constant[value=1]()
 #   %10 : int = prim::Constant[value=2]()
@@ -92,23 +92,22 @@ class Mod(nn.Module):
     def __init__(self):
         super(Mod, self).__init__()
 
-    # 默认行为: torch.jit.export
+    # 既定の動作: torch.jit.export
     def forward(self, a):
         if a.norm() > 1.0:
             return a.abs()
         else:
             return a.pow(2)
 
-    # 导出该方法
+    # このメソッドをエクスポート
     @torch.jit.export
     def square(self, a):
         return a.pow(2)
 
-    # 不导出该方法
+    # このメソッドはエクスポートしない
     @torch.jit.ignore
     def abs(self, a):
         return a.abs()
 
 mod = Mod()
 ret = torch.jit.script(mod)
-

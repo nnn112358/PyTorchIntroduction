@@ -1,24 +1,24 @@
 import torch
-# 静态模型的保存和载入
+# 静的モデルの保存と読み込み
 from torchvision.models import resnet18
 m = resnet18(pretrained=True)
-# 将模型从动态图转换为静态图
+# 動的モデルを静的グラフへ変換
 static_model = torch.jit.trace(m, torch.randn(1, 3, 224, 224))
-# 保存模型
+# モデルを保存
 torch.jit.save(static_model, "resnet18.pt")
-# 读取模型
+# モデルを読み込み
 static_model = torch.load("resnet18.pt")
 
-# 导出到ONNX
+# ONNX へエクスポート
 from torchvision.models import resnet18
-# 需要使用pip install onnx安装onnx的Python接口
+# `pip install onnx` で Python インターフェイスをインストール
 import onnx
 m = resnet18(pretrained=True)
 torch.onnx.export(m, torch.randn(1, 3, 224, 224), 
                   "resnet18.onnx", verbose=True)
-# 用onnx读入模型
+# onnx でモデルを読み込む
 m = onnx.load("resnet18.onnx")
-# 检查模型正确性
+# モデルの正当性を検証
 onnx.checker.check_model(m)
-# 打印计算图
+# 計算グラフを表示
 onnx.helper.printable_graph(m.graph)

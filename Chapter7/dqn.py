@@ -1,4 +1,4 @@
-""" 本代码仅作为DQN模型的参考实现
+""" 本コードは DQN モデルの参考実装です。
 """
 
 import torch
@@ -54,12 +54,12 @@ class Memory(object):
         
         return states, actions, states_next, rewards, is_ended
 
-# 定义两个网络，用于加速模型收敛
+# 2つのネットワークを定義して収束を促進
 dqn = DQN(2, 4, 8)
 dqn_t = DQN(2, 4, 8)
 dqn_t.load_state_dict(copy.deepcopy(dqn.state_dict()))
 eps = 0.1
-# 折扣系数
+# 割引係数
 gamma = 0.999
 
 optim = torch.optim.Adam(dqn.parameters(), lr=1e-3)
@@ -74,13 +74,13 @@ for episode in range(300):
         action_t = torch.tensor([0, 1])
         state_t = torch.tensor([state, state], dtype=torch.float32)
         
-        # 计算最优策略
+        # 最適方策を計算
         torch.set_grad_enabled(False)
         q_t = dqn(state_t, action_t)
         max_t = q_t.argmax()
         torch.set_grad_enabled(True)
         
-        # 探索和利用的平衡
+        # 探索と活用のバランス
         if random.random() < eps:
             max_t = random.choice([0, 1])
         else:
@@ -94,7 +94,7 @@ for episode in range(300):
         if done:
             break
     
-        # 重放训练
+        # 経験再生（リプレイ）による学習
         for _ in range(10):
             state_t, action_t, state_next_t, reward_t, is_ended_t = \
                 mem.sample(32)
@@ -106,11 +106,11 @@ for episode in range(300):
                          torch.zeros(state_t.size(0), dtype=torch.long))
             q2_1 = dqn_t(state_next_t, 
                          torch.ones(state_t.size(0), dtype=torch.long))
-            # 利用Bellman方程进行迭代
+            # ベルマン方程式による反復
             q2_max = reward_t + gamma*(1-is_ended_t)*
                 (torch.stack((q2_0, q2_1), dim=1).max(1)[0])
             torch.set_grad_enabled(True)
-            # 优化损失函数
+            # 損失関数を最適化
             delta = q2_max - q1
             loss = criterion(delta)
             optim.zero_grad()
@@ -119,7 +119,7 @@ for episode in range(300):
             optim.step()          
             step_cnt += 1
                             
-            # 同步两个网络的参数
+            # 2つのネットのパラメータを同期
             if step_cnt % 1000 == 0:
                 dqn_t.load_state_dict(copy.deepcopy(dqn.state_dict()))
 env.close()

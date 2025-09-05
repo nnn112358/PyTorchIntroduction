@@ -1,10 +1,10 @@
-""" 以下代码仅为Tacotron模型的一个参考实现
+""" 本コードは Tacotron モデルの参考実装です。
 """
 
 import torch
 import torch.nn as nn
 
-# Tacotron编码器
+# Tacotronエンコーダ
 class Encoder(nn.Module):
     def __init__(self, encoder_n_convolutions,
         encoder_embedding_dim, encoder_kernel_size):
@@ -29,7 +29,7 @@ class Encoder(nn.Module):
                             batch_first=True, bidirectional=True)
 
     def forward(self, x, input_lengths):
-        # 假设输入为N×C×T
+        # 入力は N×C×T と仮定
         for conv in self.convolutions:
             x = F.dropout(F.relu(conv(x)), 0.5, self.training)
 
@@ -46,7 +46,7 @@ class Encoder(nn.Module):
             outputs, batch_first=True)
         return outputs
 
-# Tacotron前处理/后处理代码
+# Tacotron 前処理/後処理コード
 class Prenet(nn.Module):
     def __init__(self, in_dim, sizes):
         super(Prenet, self).__init__()
@@ -105,7 +105,7 @@ class Postnet(nn.Module):
 
         return x
 
-# Tacotron注意力机制
+# Tacotron のアテンション機構
 class LocationLayer(nn.Module):
     def __init__(self, attention_n_filters, attention_kernel_size,
                  attention_dim):
@@ -171,7 +171,7 @@ class Attention(nn.Module):
 
         return attention_context, attention_weights
 
-# Tacotron解码器
+# Tacotronデコーダ
 class Decoder(nn.Module):
     def __init__(self, n_mel_channels, n_frames_per_step,
         encoder_embedding_dim, attention_rnn_dim,
@@ -182,8 +182,8 @@ class Decoder(nn.Module):
 
         super(Decoder, self).__init__()
 
-        # 将输入参数保存到类的属性中
-        # ... （此处省略保存输入参数的代码）
+        # 入力パラメータをクラス属性に保存
+        # ... （保存コードは省略）
         self.prenet = Prenet(
             n_mel_channels * n_frames_per_step,
             [prenet_dim, prenet_dim])
@@ -210,8 +210,8 @@ class Decoder(nn.Module):
             bias=True)
 
     def decode(self, decoder_input):
-        # 输入解码器的梅尔过滤器特征，进行注意力机制的计算和循环神经网络计算
-        # 输出解码结果，即是否终止的预测和注意力的权重
+        # デコーダにメルフィルタ特徴を入力し、アテンションと RNN を計算
+        # 出力: 終了判定の予測とアテンション重み
         cell_input = torch.cat((decoder_input, self.attention_context), -1)
         self.attention_hidden, self.attention_cell = self.attention_rnn(
             cell_input, (self.attention_hidden, self.attention_cell))

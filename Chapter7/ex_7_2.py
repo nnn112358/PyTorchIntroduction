@@ -1,8 +1,8 @@
-""" 以下代码仅为函数签名，不能实际运行
+""" このコードは関数シグネチャの例であり、実行は想定していません。
 """
 
-# CTC损失函数
+# CTC 損失関数
 class torch.nn.CTCLoss(blank=0, reduction='mean', zero_infinity=False)
 
-# 对应forward方法的定义
+# 対応する forward メソッドの定義
 def forward(self, log_probs, targets, input_lengths, target_lengths)

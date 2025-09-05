@@ -1,4 +1,4 @@
-""" 本代码仅作为DeepSpeech模型的实现参考
+""" 本コードは DeepSpeech モデルの参考実装です。
 class BNGRU(nn.Module):
     def __init__(self, input_size, hidden_size):
         super(BNGRU, self).__init__()

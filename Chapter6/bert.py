@@ -1,33 +1,32 @@
-""" 本代码仅作为BERT模型的实现参考
+""" 本コードは BERT モデル実装の参考例です
 """
 
 import torch
 import torch.nn as nn
 
-# 嵌入层
+# 埋め込み層
 class BertEmbeddings(nn.Module):
 
     def __init__(self, config):
         super(BertEmbeddings, self).__init__()
-        # 单词的词嵌入
+        # トークン埋め込み
         self.word_embeddings = nn.Embedding(config.vocab_size, 
                                             config.hidden_size, padding_idx=0)
-        # 位置的嵌入
+        # 位置埋め込み
         self.position_embeddings = nn.Embedding(\
                                         config.max_position_embeddings,
                                         config.hidden_size)
-        # 片段的词嵌入
+        # セグメント埋め込み
         self.token_type_embeddings = nn.Embedding(config.type_vocab_size,
                                                           config.hidden_size)
-        # 层归一化
+        # 層正規化
         self.LayerNorm = nn.LayerNorm(config.hidden_size,
                                             eps=config.layer_norm_eps)
-        # 丢弃层
+        # ドロップアウト層
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
     def forward(self, input_ids, token_type_ids=None, position_ids=None):
-        # 假设模型的输入input_ids的大小是L×N，其中L为最大序列长度，
-        # N为迷你批次大小
+        # 入力 `input_ids` のサイズは L×N（L: 最大系列長, N: ミニバッチ）と仮定
         seq_length = input_ids.size(0)
         if position_ids is None:
             position_ids = torch.arange(seq_length, 
@@ -46,7 +45,7 @@ class BertEmbeddings(nn.Module):
         embeddings = self.dropout(embeddings)
         return embeddings
 
-# BERT编码器
+# BERT エンコーダ
 class BertEncoder(nn.Module):
     def __init__(self, config):
         super(BertEncoder, self).__init__()
@@ -62,7 +61,7 @@ class BertEncoder(nn.Module):
     def forward(self, hidden_states, attention_mask=None, head_mask=None):
         all_hidden_states = ()
         all_attentions = ()
-        # 迭代计算中间的输出
+        # 中間層の出力を逐次計算
         for i, layer_module in enumerate(self.layer):
             if self.output_hidden_states:
                 all_hidden_states = all_hidden_states + (hidden_states,)
@@ -82,10 +81,10 @@ class BertEncoder(nn.Module):
             outputs = outputs + (all_hidden_states,)
         if self.output_attentions:
             outputs = outputs + (all_attentions,)
-        # 包含最后的输出、中间的输出，以及自注意力的权重
+        # 最終出力・中間出力・自己アテンション重みを含む
         return outputs  
 
-# BERT预训练模型
+# BERT 事前学習モデル
 class BertPretrainModel(nn.Module):
     def __init__(self, config):
         super(BertPretrainModel, self).__init__()
@@ -117,7 +116,7 @@ class BertPretrainModel(nn.Module):
 
         return logits_lm, logits_clsf
 
-# BERT机器阅读理解任务
+# BERT 機械読解タスク
 class BertQA(nn.Module)
     def __init__(self, config):
         super(BertQA, self).__init__()

@@ -1,10 +1,10 @@
-""" 以下代码仅作为循环神经网络语言模型的实现参考
+""" 以下のコードは RNN 言語モデル実装の参考例です
 """
 
 import torch
 import torch.nn as nn
 
-# 模型
+# モデル
 class LM(nn.Module):
 
     def __init__(self, ntoken, ninp, nhid, nlayers, dropout=0.5,
@@ -44,19 +44,18 @@ class LM(nn.Module):
         return (weight.new_zeros(self.nlayers, bsz, self.nhid),
                 weight.new_zeros(self.nlayers, bsz, self.nhid)
 
-# 训练代码
+# 学習コード
 model = LM(ntokens, ninp, nhid, nlayers, dropout, tie_weights).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=lr)
 
 def train(model, iterator, optimizer, criterion):
     model.train()
-    # 获取单词表大小
+    # 語彙サイズを取得
     ntokens = len(vocab)
 
     for data, targets in train_data:
-        # data和targets的形状大小都为 L×N,
-        # 其中L为序列长度， N为批次大小
+        # data / targets の形状は L×N（L: 系列長, N: バッチ）
         data, targets = get_batch(train_data, i)
         model.zero_grad()
         hidden = model.init_hidden(data.size(1))
@@ -69,7 +68,7 @@ def train(model, iterator, optimizer, criterion):
 
     return model
 
-# 预测代码
+# 予測コード
 def evaluate(model):
     model.eval()
     hidden = model.init_hidden(1)

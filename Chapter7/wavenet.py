@@ -1,10 +1,10 @@
-""" 以下代码仅作为WaveNet的实现参考
+""" 本コードは WaveNet の参考実装です。
 """
 
 import torch
 import torch.nn as nn
 
-# 因果卷积模块
+# 因果畳み込みモジュール
 class CausalConv(nn.Module):
 
     def __init__(self, residual_channels, gate_channels, kernel_size,
@@ -28,21 +28,20 @@ class CausalConv(nn.Module):
 
     def forward(self, x, x_local):
 
-        # x为音频信号，x_local为梅尔过滤器特征上采样到和x维度相同后的结果
-        # 假设输入x的大小为N×C×T，其中N为批次大小，C为输入特征大小，
-        # T为序列长度
-        # x_local大小和x大小相同
+        # x は音声信号、x_local はメル特徴を x と同次元へアップサンプルした結果
+        # 入力 x のサイズは N×C×T（N: バッチ、C: 特徴、T: 長さ）
+        # x_local のサイズは x と同じ
 
         residual = x
         x = F.dropout(x, p=self.dropout, training=self.training)
 
-        # 因果卷积
+        # 因果畳み込み
         x = self.conv(x)
         x = x[:, :, :residual.size(-1)]
 
-        # 因果卷积结果分割
+        # 因果畳み込みの出力を分割
         a, b = x.split(x.size(-1) // 2, dim=-1)
-        # 加入局域特征的调制
+        # ローカル特徴で変調
         c = self.conv1x1_local(x_local)
         ca, cb = c.split(c.size(-1) // 2, dim=-1)
         a, b = a + ca, b + cb
@@ -55,7 +54,7 @@ class CausalConv(nn.Module):
         x = (x + residual) * math.sqrt(0.5)
         return x, s
 
-# WaveNet模型代码
+# WaveNetモデルコード
 class WaveNet(nn.Module):
 
     def __init__(self, out_channels=256, layers=20,
@@ -93,9 +92,9 @@ class WaveNet(nn.Module):
 
     def forward(self, x, x_local):
 
-        # x为音频信号，x_local为梅尔过滤器特征
+        # x は音声信号、x_local はメル特徴
         B, _, T = x.size()
-        # 对特征进行上采样，输出和音频信号长度相同的信号
+        # 特徴をアップサンプルし、音声と同じ長さの信号を出力
         c = self.upsample_net(x_local)
         x = self.first_conv(x)
         skips = 0
@@ -108,6 +107,6 @@ class WaveNet(nn.Module):
         for f in self.last_conv_layers:
             x = f(x)
 
-        # 输出每个强度的概率
+        # 各強度の確率を出力
         x = F.softmax(x, dim=1)
         return x

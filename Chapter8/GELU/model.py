@@ -1,8 +1,8 @@
-# 静态加载
+# 静的ロード
 import torch
 import gelu
 
-# 同样可以通过 gelu = GELU.apply使用这个激活函数
+# 同様に gelu = GELU.apply でもこの活性化関数を利用できる
 class GELU(torch.autograd.Function):
 
     @staticmethod
@@ -15,11 +15,11 @@ class GELU(torch.autograd.Function):
         input = ctx.input
         return gelu.backward(grad_output, input)
 
-# 动态加载
+# 動的ロード
 import torch
 from torch.utils.cpp_extension import load
 
-# PyTorch会进行自动编译，生成对应的模块
+# PyTorch が自動ビルドして対応するモジュールを生成
 gelu = load(name="gelu", sources=["gelu/gelu.cc"])
 
 class GELU(torch.autograd.Function):

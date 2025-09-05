@@ -1,47 +1,47 @@
-""" 本代码仅作为钩子函数的演示代码
+""" 本コードはフック関数のデモです。
 """
 
-# 模块执行之前的前向计算钩子的定义
-# 定义nn.Module的一个实例模块
+# モジュール実行前の forward フック
+# nn.Module のインスタンスを定義
 module = ...
 def hook(module, input):
-    # 对模块权重或者输入进行操作的代码
-    # 函数结果可以返回修改后的张量或者None
+    # モジュールの重みや入力に対する処理
+    # 返り値は変更後テンソルまたは None
     return input
 handle = module.register_forward_pre_hook(hook)
 
-# 模块执行之后的前向计算钩子的定义
-# 定义nn.Module的一个实例模块
+# モジュール実行後の forward フック
+# nn.Module のインスタンスを定義
 module = ...
 def hook(module, input, output):
-    # 对模块权重或者输入/输出进行操作的代码
-    # 函数结果可以返回修改后的张量或者None
+    # モジュールの重みや入出力に対する処理
+    # 返り値は変更後テンソルまたは None
     return output
 handle = module.register_forward_hook(hook)
 
-# 模块执行之后的反向传播钩子的定义
-# 定义nn.Module的一个实例模块
+# モジュール実行後の backward フック
+# nn.Module のインスタンスを定義
 module = ...
 def hook(module, grad_input, grad_output):
-    # 对模块权重或者输入/输出梯度进行操作的代码
-    # 函数结果可以返回修改后的张量或者None
+    # モジュールの重みや入出力の勾配に対する処理
+    # 返り値は変更後テンソルまたは None
     return output
 handle = module.register_backward_hook(hook)
 
-# 钩子的使用方法示例
+# フックの使用例
 import torch
 import torch.nn as nn
 def print_pre_shape(module, input):
-    print("模块前钩子")
+    print("前フック")
     print(module.weight.shape)
     print(input[0].shape)
 def print_post_shape(module, input, output):
-    print("模块后钩子")
+    print("後フック")
     print(module.weight.shape)
     print(input[0].shape)
     print(output[0].shape)
 def print_grad_shape(module, grad_input, grad_output):
-    print("梯度钩子")
+    print("勾配フック")
     print(module.weight.grad.shape)
     print(grad_input[0].shape)
     print(grad_output[0].shape)

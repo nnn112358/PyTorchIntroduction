@@ -1,10 +1,10 @@
-""" 以下代码仅作为word2vec的CBOW模型的实现参考
+""" 以下のコードは word2vec の CBOW モデル実装の参考例です
 """
 
 import torch
 import torch.nn as nn
 
-# 定义CBOW模型
+# CBOW モデルの定義
 class CBOW(nn.Module):
     def __init__(self, vocab_size, embd_size, context_size, hidden_size):
         super(CBOW, self).__init__()
@@ -20,7 +20,7 @@ class CBOW(nn.Module):
         return out
 
 
-# 模型的训练
+# モデルの学習
 def train_cbow():
     hidden_size = 128
     losses = []
@@ -37,4 +37,3 @@ def train_cbow():
             optimizer.step()
 
     return model
-

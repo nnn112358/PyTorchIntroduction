@@ -1,10 +1,10 @@
-""" 本代码仅作为Seq2Seq模型的实现参考
+""" 本コードは Seq2Seq モデル実装の参考例です
 """
 
 import torch
 import torch.nn as nn
 
-# 编码器
+# エンコーダ
 class LSTMEncoder(nn.Module):
     def __init__(
         self, dictionary,embed_dim=512, hidden_size=512, num_layers=1,
@@ -20,7 +20,7 @@ class LSTMEncoder(nn.Module):
         self.hidden_size = hidden_size
 
         num_embeddings = len(dictionary)
-        # 获取单词表中'<PAD>'单词对应的整数索引
+        # 語彙中の '<PAD>' に対応するインデックスを取得
         self.padding_idx = dictionary.pad()
         self.embed_tokens = Embedding(num_embeddings, embed_dim,
                                       self.padding_idx)
@@ -39,30 +39,30 @@ class LSTMEncoder(nn.Module):
             self.output_units *= 2
 
     def forward(self, src_tokens, src_lengths):
-        # 假设输入为 L×N，其中L为最大序列长度，N为迷你批次大小
+        # 入力は L×N（L: 最大系列長, N: ミニバッチ）
         seqlen, bsz = src_tokens.size()
-        # 查找输入序列对应的词嵌入
+        # 入力系列に対応する埋め込みを取得
         x = self.embed_tokens(src_tokens)
         x = F.dropout(x, p=self.dropout_in, training=self.training)
-        # 对输入张量进行打包
+        # 入力テンソルをパック
         packed_x = nn.utils.rnn.pack_padded_sequence(x,
                                                      src_lengths.data.tolist())
-        # 获取隐含状态大小
+        # 隠れ状態のサイズを取得
         if self.bidirectional:
             state_size = 2 * self.num_layers, bsz, self.hidden_size
         else:
             state_size = self.num_layers, bsz, self.hidden_size
-        # 初始化隐含状态为全零张量
+        # 隠れ状態をゼロで初期化
         h0 = x.new_zeros(*state_size)
         c0 = x.new_zeros(*state_size)
-        # 根据输入张量计算LSTM输出
+        # 入力テンソルから LSTM の出力を計算
         packed_outs, (final_hiddens, final_cells) = self.lstm(packed_ x, (h0, c0))
-        # 对LSTM输出进行解包
+        # LSTM の出力をアンパック
         x, _ = nn.utils.rnn.pad_packed_sequence(packed_outs,
                                                 padding_value=self.padding_value)
         x = F.dropout(x, p=self.dropout_out, training=self.training)
 
-        # 融合双向LSTM的维度
+        # 融合双向LSTM的次元
         if self.bidirectional:
             def combine_bidir(outs):
                 out = outs.view(self.num_layers, 2, bsz, -1)\
@@ -80,7 +80,7 @@ class LSTMEncoder(nn.Module):
                 if encoder_padding_mask.any() else None
         }
 
-# 注意力机制
+# アテンション機構
 class AttentionLayer(nn.Module):
     def __init__(self, input_embed_dim, source_embed_dim,
                  output_embed_dim, bias=False):
@@ -93,15 +93,14 @@ class AttentionLayer(nn.Module):
 
     def forward(self, input, source_hids, encoder_padding_mask):
 
-        # 假设input为 B×H，B为迷你批次的大小，H为隐含状态大小
-        # 假设source_hids为L×B×H，L为序列长度，B为迷你批次的大小，
-        # H为隐含状态大小
+          # 入力は B×H（B: ミニバッチ, H: 隠れ状態次元）
+          # source_hids は L×B×H（L: 系列長）
         x = self.input_proj(input)
 
-        # 计算注意力分数
+          # アテンションスコアを計算
         attn_scores = (source_hids * x.unsqueeze(0)).sum(dim=2)
 
-        # 设置填充单词的注意力分数为-inf
+          # パディングトークンのスコアを -inf に設定
         if encoder_padding_mask is not None:
             attn_scores = attn_scores.float().masked_fill_(
                 encoder_padding_mask,
@@ -110,13 +109,13 @@ class AttentionLayer(nn.Module):
 
         attn_scores = F.softmax(attn_scores, dim=0)
 
-        # 对编码器输出加权平均
+          # エンコーダ出力の重み付き平均
         x = (attn_scores.unsqueeze(2) * source_hids).sum(dim=0)
 
         x = torch.tanh(self.output_proj(torch.cat((x, input), dim=1)))
         return x, attn_scores
 
-# 解码器
+# デコーダ
 class LSTMDecoder(nn.Module):
 
     def __init__(
@@ -162,7 +161,7 @@ class LSTMDecoder(nn.Module):
         encoder_padding_mask = encoder_out['encoder_padding_mask']
         encoder_out = encoder_out['encoder_out']
 
-        # 获取保存的输出单词，用于模型的预测
+        # 予測で使用する出力トークンを取得
         if incremental_state is not None:
             prev_output_tokens = prev_output_tokens[:, -1:]
         bsz, seqlen = prev_output_tokens.size()
@@ -173,7 +172,7 @@ class LSTMDecoder(nn.Module):
         x = self.embed_tokens(prev_output_tokens)
         x = F.dropout(x, p=self.dropout_in, training=self.training)
 
-        # 获取保存的状态，用于模型的预测
+        # 予測で使用する状態を取得
         cached_state = utils.get_incremental_state(self, incremental_state,
                                                       'cached_state')
 
@@ -192,11 +191,11 @@ class LSTMDecoder(nn.Module):
         attn_scores = x.new_zeros(srclen, seqlen, bsz)
         outs = []
 
-        # 进行迭代的循环神经网络计算
+        # 反復して RNN 計算を実施
         for j in range(seqlen):
-            # 输入中引入上一步的注意力机制的信息
+            # 前ステップのアテンション情報を入力へ導入
             input = torch.cat((x[j, :, :], input_feed), dim=1)
-            # 迭代所有的循环神经网络层
+            # すべての RNN 層を反復
             for i, rnn in enumerate(self.layers):
                 hidden, cell = rnn(input, (prev_hiddens[i], prev_cells[i]))
                 input = F.dropout(hidden, p=self.dropout_out,
@@ -204,7 +203,7 @@ class LSTMDecoder(nn.Module):
 
                 prev_hiddens[i] = hidden
                 prev_cells[i] = cell
-            # 计算注意力的输出值和注意力权重
+            # アテンションの出力と重みを計算
             if self.attention is not None:
                 out, attn_scores[:, j, :] = self.attention(
                     hidden, encoder_outs, encoder_padding_mask)
@@ -214,7 +213,7 @@ class LSTMDecoder(nn.Module):
             input_feed = out
             outs.append(out)
             
-        # 保存隐含状态
+        # 保存隠れ状態
         utils.set_incremental_state(
             self, incremental_state, 'cached_state',
             (prev_hiddens, prev_cells, input_feed),
