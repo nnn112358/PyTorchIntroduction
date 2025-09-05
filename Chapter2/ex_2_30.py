@@ -1,4 +1,4 @@
-""" 该代码仅为演示函数签名所用，并不能实际运行
+""" このコードは関数シグネチャの例であり、実行は想定していません。
 """
 
 DataLoader(dataset, batch_size=1, shuffle=False, sampler=None,

@@ -1,7 +1,7 @@
-""" 本代码可以被其它代码导入，作为模型的一部分
+""" このコードは他のコードからインポートしてモデルの一部として利用可能。
 """
 
-# InceptionA 模块
+# InceptionA モジュール
 class InceptionA(nn.Module):
 
     def __init__(self, in_channels, pool_features):
@@ -34,7 +34,7 @@ class InceptionA(nn.Module):
         outputs = [branch1x1, branch5x5, branch3x3dbl, branch_pool]
         return torch.cat(outputs, 1)
 
-# InceptionB 模块
+# InceptionB モジュール
 class InceptionB(nn.Module):
 
     def __init__(self, in_channels):
@@ -58,7 +58,7 @@ class InceptionB(nn.Module):
         outputs = [branch3x3, branch3x3dbl, branch_pool]
         return torch.cat(outputs, 1)
 
-# InceptionC 模块
+# InceptionC モジュール
 class InceptionC(nn.Module):
 
     def __init__(self, in_channels, channels_7x7):
@@ -103,7 +103,7 @@ class InceptionC(nn.Module):
         outputs = [branch1x1, branch7x7, branch7x7dbl, branch_pool]
         return torch.cat(outputs, 1)
 
-# InceptionD 模块
+# InceptionD モジュール
 class InceptionD(nn.Module):
 
     def __init__(self, in_channels):
@@ -129,7 +129,7 @@ class InceptionD(nn.Module):
         outputs = [branch3x3, branch7x7x3, branch_pool]
         return torch.cat(outputs, 1)
 
-# InceptionE 模块
+# InceptionE モジュール
 class InceptionE(nn.Module):
 
     def __init__(self, in_channels):
@@ -175,7 +175,7 @@ class InceptionE(nn.Module):
         outputs = [branch1x1, branch3x3, branch3x3dbl, branch_pool]
         return torch.cat(outputs, 1)
 
-# InceptionAux 模块
+# InceptionAux モジュール
 class InceptionAux(nn.Module):
 
     def __init__(self, in_channels, num_classes):

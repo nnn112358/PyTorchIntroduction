@@ -1,13 +1,13 @@
 def main_worker(gpu, ngpus_per_node, args):
     # ...
-    # 设置数据集目录
+    # データセットのディレクトリを設定
     traindir = os.path.join(args.data, 'train')
     valdir = os.path.join(args.data, 'val')
-    # 设置预处理方法
+    # 前処理を設定
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                      std=[0.229, 0.224, 0.225])
 
-    # 训练数据集
+    # 学習データセット
     train_dataset = datasets.ImageFolder(
         traindir,
         transforms.Compose([
@@ -23,7 +23,7 @@ def main_worker(gpu, ngpus_per_node, args):
         num_workers=args.workers, pin_memory=True, 
         sampler=train_sampler)
 
-    # 测试数据集
+    # 検証データセット
     val_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(valdir, transforms.Compose([
             transforms.Resize(256),

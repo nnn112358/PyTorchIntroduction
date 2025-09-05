@@ -1,14 +1,14 @@
-""" 该代码仅为演示函数签名所用，并不能实际运行
+""" このコードは関数シグネチャの例であり、実行は想定していません。
 """
 
-save_info = { # 保存的信息
-    "iter_num": iter_num,  # 迭代步数 
-    "optimizer": optimizer.state_dict(), # 优化器的状态字典
-    "model": model.state_dict(), # 模型的状态字典
+save_info = { # 保存する情報
+    "iter_num": iter_num,  # 反復回数 
+    "optimizer": optimizer.state_dict(), # オプティマイザの state_dict
+    "model": model.state_dict(), # モデルの state_dict
 }
-# 保存信息
+# 情報を保存
 torch.save(save_info, save_path)
-# 载入信息
+# 情報を読み込み
 save_info = torch.load(save_path)
 optimizer.load_state_dict(save_info["optimizer"])
 model.load_state_dict(sae_info["model"])

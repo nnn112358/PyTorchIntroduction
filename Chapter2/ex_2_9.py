@@ -1,26 +1,26 @@
-""" 为了能够现实下列代码的执行效果，请在安装PyTorch之后，在Python交互命令行界面，
-    即在系统命令行下输入python这个命令回车后，在>>>提示符后执行下列代码
-    （#号及其后面内容为注释，可以忽略）
+""" 以下のコードの実行結果を再現するには、PyTorch をインストールした後、
+    システムのコマンドラインで `python` を実行して対話モードに入り、>>> プロンプトで次のコードを入力してください。
+    （# 以降はコメントのため無視して構いません）
 """
 
 import torch
 
-t = torch.randn(3,4,5) # 产生一个3×4×5的张量
-t.ndimension() # 获取维度的数目
-t.nelement() # 获取该张量的总元素数目
-t.size() # 获取该张量每个维度的大小，调用方法
-t.shape # 获取该张量每个维度的大小，访问属性
-t.size(0) # 获取该张量维度0的大小，调用方法
-t = torch.randn(12) # 产生大小为12的向量
-t.view(3, 4) # 向量改变形状为3×4的矩阵
-t.view(4, 3) # 向量改变形状为4×3的矩阵
-t.view(-1, 4) # 第一个维度为-1，PyTorch会自动计算该维度的具体值
-t # view方法不改变底层数据，改变view后张量会改变原来的张量
+t = torch.randn(3,4,5) # 3×4×5 のテンソルを生成
+t.ndimension() # 次元数を取得
+t.nelement() # テンソルの総要素数を取得
+t.size() # 各次元のサイズ（メソッド）
+t.shape # 各次元のサイズ（属性）
+t.size(0) # 次元 0 のサイズ（メソッド）
+t = torch.randn(12) # 長さ 12 のベクトルを生成
+t.view(3, 4) # ベクトルを 3×4 の行列へ変形
+t.view(4, 3) # ベクトルを 4×3 の行列へ変形
+t.view(-1, 4) # 先頭次元を -1（自動計算）にして変形
+t # view は基礎データを変えず、view 後の変更は元テンソルに反映
 t.view(4, 3)[0, 0] = 1.0
-t.data_ptr() # 获取张量的数据指针
-t.view(3,4).data_ptr() # 数据指针不改变
-t.view(4,3).data_ptr() # 同上，不改变
-t.view(3,4).contiguous().data_ptr() # 同上，不改变
-t.view(4,3).contiguous().data_ptr() # 同上，不改变
-t.view(3,4).transpose(0,1).data_ptr() # transpose方法交换两个维度的步长
-t.view(3,4).transpose(0,1).contiguous().data_ptr() # 步长和维度不兼容，重新生成张量
+t.data_ptr() # テンソルのデータポインタを取得
+t.view(3,4).data_ptr() # データポインタは変わらない
+t.view(4,3).data_ptr() # 同上、変わらない
+t.view(3,4).contiguous().data_ptr() # 同上、変わらない
+t.view(4,3).contiguous().data_ptr() # 同上、変わらない
+t.view(3,4).transpose(0,1).data_ptr() # 転置でストライドが入れ替わる
+t.view(3,4).transpose(0,1).contiguous().data_ptr() # ストライド不整合のため再配置

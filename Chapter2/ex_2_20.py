@@ -1,5 +1,5 @@
-"""  本代码定义的模块可以用于其它的Python脚本，已经Python的交互命令行界面
-    （#号及其后面内容为注释，可以忽略）
+""" 本モジュールは他の Python スクリプトや Python 対話環境でも利用できます。
+    （# 以降はコメントのため無視して構いません）
 """
 
 import torch
@@ -10,9 +10,9 @@ class LinearModel(nn.Module):
         super(LinearModel, self).__init__()
         self.ndim = ndim
 
-        self.weight = nn.Parameter(torch.randn(ndim, 1)) # 定义权重
-        self.bias = nn.Parameter(torch.randn(1)) # 定义偏置
+        self.weight = nn.Parameter(torch.randn(ndim, 1)) # 重みを定義
+        self.bias = nn.Parameter(torch.randn(1)) # バイアスを定義
 
     def forward(self, x):
-        # 定义线性模型 y = Wx + b
+        # 線形モデル y = Wx + b を定義
         return x.mm(self.weight) + self.bias

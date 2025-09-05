@@ -1,4 +1,4 @@
-""" 该代码定义了LeNet模型
+""" 本コードは LeNet モデルの定義です。
 """
 
 import torch
@@ -26,6 +26,6 @@ class LeNet(nn.Module):
         return x
 
 if __name__ == "__main__":
-    model = LeNet() # 初始化实例
-    ret = model(torch.randn(1, 1, 32, 32)) # 输入一张图片，测试输出结果
+    model = LeNet() # インスタンスを初期化
+    ret = model(torch.randn(1, 1, 32, 32)) # 画像1枚を入力し出力を確認
     ret.shape # torch.Size([1, 10])  

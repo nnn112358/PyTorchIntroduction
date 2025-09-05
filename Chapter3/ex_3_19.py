@@ -1,5 +1,5 @@
-""" 本文件中的代码可以通过使用命令 python ex_3_19.py 运行  
-   （#号及其后面内容为注释，可以忽略）
+""" このファイルのコードは `python ex_3_19.py` で実行できます。
+   （# 以降はコメントのため無視して構いません）
 """
 
 import torch
@@ -42,19 +42,19 @@ class AlexNet(nn.Module):
         x = self.classifier(x)
         return x
 
-# 打印出模型的特征提取模块
+# モデルの特徴抽出モジュールを表示
 from torchvision.models import alexnet
 model = alexnet(pretrained=True)
 print(model.features)
 
-# 不同层特征提取模块的构造
+# 異なる層の特徴抽出モジュールの構築
 conv1 = nn.Sequential(*model.features[:1])
 conv2 = nn.Sequential(*model.features[:4])
 conv3_1 = nn.Sequential(*model.features[:7])
 conv3_2 = nn.Sequential(*model.features[:9])
 conv3_3 = nn.Sequential(*model.features[:11])
 
-# 根据输入的图像张量（1×3×224×224）输出特征张量
+# 入力画像テンソル（1×3×224×224）に対する特徴テンソルを出力
 feat1 = conv1(img)
 feat2 = conv2(img)
 feat3_1 = conv3_1(img)

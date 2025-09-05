@@ -1,10 +1,10 @@
-""" 为了能够现实下列代码的执行效果，请在安装PyTorch之后，在Python交互命令行界面，
-    即在系统命令行下输入python这个命令回车后，在>>>提示符后执行下列代码
-    （#号及其后面内容为注释，可以忽略）
+""" 以下のコードの実行結果を再現するには、PyTorch をインストールした後、
+    システムのコマンドラインで `python` を実行して対話モードに入り、>>> プロンプトで次のコードを入力してください。
+    （# 以降はコメントのため無視して構いません）
 """
 
 import torch
 
-t1 = torch.randn(3, 3, requires_grad=True) # 初始化t1张量
-t2 = t1.pow(2).sum() # 根据t1张量计算t2张量
-torch.autograd.grad(t2, t1) # t2张量对t1张量求导
+t1 = torch.randn(3, 3, requires_grad=True) # t1 テンソルを初期化
+t2 = t1.pow(2).sum() # t1 から t2 を計算
+torch.autograd.grad(t2, t1) # t2 の t1 に対する勾配を求める

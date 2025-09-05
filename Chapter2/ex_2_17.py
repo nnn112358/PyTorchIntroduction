@@ -1,14 +1,14 @@
-""" 为了能够现实下列代码的执行效果，请在安装PyTorch之后，在Python交互命令行界面，
-    即在系统命令行下输入python这个命令回车后，在>>>提示符后执行下列代码
-    （#号及其后面内容为注释，可以忽略）
+""" 以下のコードの実行結果を再現するには、PyTorch をインストールした後、
+    システムのコマンドラインで `python` を実行して対話モードに入り、>>> プロンプトで次のコードを入力してください。
+    （# 以降はコメントのため無視して構いません）
 """
 
 import torch
 
-t = torch.rand(3, 4) # 随机生成一个张量
+t = torch.rand(3, 4) # ランダムにテンソルを生成
 t.shape
-t.unsqueeze(-1).shape # 扩增最后一个维度
-t.unsqueeze(-1).unsqueeze(-1).shape # 继续扩增最后一个维度
-t = torch.rand(1,3,4,1) # 随机生成一个张量，有两个维度大小为1
+t.unsqueeze(-1).shape # 最後の次元を拡張
+t.unsqueeze(-1).unsqueeze(-1).shape # さらに最後の次元を拡張
+t = torch.rand(1,3,4,1) # 2 つの次元サイズが 1 のテンソル
 t.shape
-t.squeeze().shape # 压缩所有大小为1的维度
+t.squeeze().shape # サイズ 1 の次元をすべて圧縮

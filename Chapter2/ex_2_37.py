@@ -1,6 +1,6 @@
-""" 该代码可以直接使用 python ex_2_37.py 运行（需要安装TensorBoard）
-    （#号及其后面内容为注释，可以忽略）
-    结合ex_2_20.py中定义的LinearModel模型
+""" このコードは `python ex_2_37.py` で実行できます（TensorBoard が必要）。
+    （# 以降はコメントのため無視して構いません）
+    ex_2_20.py で定義した LinearModel を利用
 """
 
 
@@ -17,13 +17,13 @@ criterion = nn.MSELoss()
 optim = torch.optim.SGD(lm.parameters(), lr=1e-6)
 data = torch.tensor(boston["data"], requires_grad=True, dtype=torch.float32)
 target = torch.tensor(boston["target"], dtype=torch.float32)
-writer = SummaryWriter() # 定义TensorBoard输出类
+writer = SummaryWriter() # TensorBoard 出力クラスを定義
 for step in range(10000):
     predict = lm(data)
     loss = criterion(predict, target)
-    writer.add_scalar("Loss/train", loss, step) # 输出损失函数
-    writer.add_histogram("Param/weight", lm.weight, step) # 输出权重直方图
-    writer.add_histogram("Param/bias", lm.bias, step) # 输出偏置直方图
+    writer.add_scalar("Loss/train", loss, step) # 損失を記録
+    writer.add_histogram("Param/weight", lm.weight, step) # 重みのヒストグラム
+    writer.add_histogram("Param/bias", lm.bias, step) # バイアスのヒストグラム
     if step and step % 1000 == 0 :
         print("Loss: {:.3f}".format(loss.item()))
     optim.zero_grad()

@@ -1,13 +1,13 @@
-""" 为了能够现实下列代码的执行效果，请在安装PyTorch之后，在Python交互命令行界面，
-    即在系统命令行下输入python这个命令回车后，在>>>提示符后执行下列代码
-    （#号及其后面内容为注释，可以忽略）
-    结合ex_2_20.py中定义的LinearModel模型
+""" 以下のコードの実行結果を再現するには、PyTorch をインストールした後、
+    システムのコマンドラインで `python` を実行して対話モードに入り、>>> プロンプトで次のコードを入力してください。
+    （# 以降はコメントのため無視して構いません）
+    ex_2_20.py で定義した LinearModel を利用
 """
 
 import torch
 import torch.nn as nn
 from ex_2_20 import LinearModel
 
-lm = LinearModel(5) # 定义线性回归模型，特征数为5
-x = torch.randn(4, 5) # 定义随机输入，迷你批次大小为4
-lm(x) # 得到每个迷你批次的输出
+lm = LinearModel(5) # 線形回帰モデル（特徴数 5）を定義
+x = torch.randn(4, 5) # ランダム入力（ミニバッチサイズ 4）
+lm(x) # 各ミニバッチの出力を得る

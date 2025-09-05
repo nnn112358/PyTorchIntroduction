@@ -1,29 +1,29 @@
-""" 该代码定义了LeNet模型的推断过程
+""" 本コードは LeNet モデルの推論手順を定義します。
 """
 
 import torch
 import torch.nn as nn
 from model import LeNet
 
-# ... 此处略去定义测试数据载入器的代码，具体参考代码4.3
+# ... テスト用データローダの定義は省略（コード 4.3 を参照）
 
-# save_info = { # 保存的信息
-#    "iter_num": iter_num,  # 迭代步数 
-#    "optimizer": optimizer.state_dict(), # 优化器的状态字典
-#    "model": model.state_dict(), # 模型的状态字典
+# save_info = { # 保存する情報
+#    "iter_num": iter_num,  # 反復回数 
+#    "optimizer": optimizer.state_dict(), # オプティマイザの state_dict
+#    "model": model.state_dict(), # モデルの state_dict
 # }
  
-model_path = "./model.pth" # 假设模型保存在model.pth文件中
-save_info = torch.load(model_path) # 载入模型
-model = LeNet() # 定义LeNet模型
-criterion = nn.CrossEntropyLoss() # 定义损失函数
-model.load_state_dict(save_info["model"]) # 载入模型参数
-model.eval() # 切换模型到测试状态
+model_path = "./model.pth" # モデルが model.pth に保存されていると仮定
+save_info = torch.load(model_path) # モデルを読み込み
+model = LeNet() # LeNet モデルを定義
+criterion = nn.CrossEntropyLoss() # 損失関数を定義
+model.load_state_dict(save_info["model"]) # モデルパラメータを読み込み
+model.eval() # 評価モードへ切り替え
 
 test_loss = 0
 correct = 0
 total = 0
-with torch.no_grad(): # 关闭计算图
+with torch.no_grad(): # 計算グラフを無効化
     for batch_idx, (inputs, targets) in enumerate(data_test_loader):
 
         outputs = model(inputs)

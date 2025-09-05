@@ -1,11 +1,11 @@
-""" 该代码改编自PyTorch的教程：
+""" このコードは PyTorch チュートリアルを基に改変：
     https://pytorch.org/tutorials/advanced/neural_style_tutorial.html
 """
 
 import torch
 import torch.nn as nn
 
-# 内容损失函数
+# 内容損失関数
 class ContentLoss(nn.Module):
 
     def __init__(self, target,):
@@ -16,7 +16,7 @@ class ContentLoss(nn.Module):
         self.loss = F.mse_loss(input, self.target)
         return input
 
-# 风格损失函数
+# スタイル損失関数
 def gram_matrix(input):
 
     a, b, c, d = input.size()
@@ -36,7 +36,7 @@ class StyleLoss(nn.Module):
         self.loss = F.mse_loss(G, self.target)
         return input
 
-# 图像归一化的变换模块
+# 画像正規化の変換モジュール
 class Normalization(nn.Module):
     def __init__(self, mean, std):
         super(Normalization, self).__init__()
@@ -46,7 +46,7 @@ class Normalization(nn.Module):
     def forward(self, img):
         return (img - self.mean) / self.std
 
-# 特征的提取和损失函数的计算
+# 特徴抽出と損失の計算
 content_layers_default = ['conv_4']
 style_layers_default = ['conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5']
 
@@ -103,15 +103,15 @@ def get_style_model_and_losses(cnn, normalization_mean, normalization_std,
 
     return model, style_losses, content_losses
 
-# 输出图像的初始化和优化器的定义
+# 出力画像の初期化とオプティマイザの定義
 input_img = content_img.clone()
-# 如果需要对风格迁移输出张量进行随机初始化，使用以下代码
+# スタイル転送の出力テンソルをランダム初期化する場合は以下を使用
 # input_img = torch.randn(content_img.data.size(), device=device)
 def get_input_optimizer(input_img):
     optimizer = optim.LBFGS([input_img.requires_grad_()])
     return optimizer
 
-# 输出图像的优化算法
+# 出力画像の最適化アルゴリズム
 def run_style_transfer(cnn, normalization_mean, normalization_std,
                        content_img, style_img, input_img, num_steps=300,
                        style_weight=1000000, content_weight=1):

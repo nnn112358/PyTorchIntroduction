@@ -1,13 +1,13 @@
-""" 该代码仅为演示函数签名所用，并不能实际运行
+""" このコードは関数シグネチャの例であり、実行は想定していません。
 """
-# 计算增益系数函数签名
+# ゲイン係数の計算（関数シグネチャ）
 torch.nn.init.calculate_gain(nonlinearity, param=None)
 
-# 计算并且打印增益系数
+# ゲイン係数を計算して表示
 gain = nn.init.calculate_gain('leaky_relu', 0.2)
 print(gain)
 
-# 参数初始化函数签名
+# パラメータ初期化（関数シグネチャ）
 torch.nn.init.uniform_(tensor, a=0.0, b=1.0)
 torch.nn.init.normal_(tensor, mean=0.0, std=1.0)
 torch.nn.init.ones_(tensor)

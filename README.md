@@ -1,230 +1,230 @@
-# 《深入浅出PyTorch——从模型到源码》书籍源代码
-**（如果对于代码有疑惑或者代码中有错误，请在GitHub仓库开新的Issue指出。）**
+# 『わかりやすい PyTorch —— モデルからソースコードまで』書籍のソースコード
+**コードに関する疑問や誤りがあれば、GitHub リポジトリで Issue を作成してください。**
 
-## 源代码目录
+## ソースコード目次
 
-## 1. 第一章 深度学习概念简介
+## 1. 第1章 深層学習の概念概要
 
-(无代码，略)
+（コードなし、割愛）
 
-## 2. 第二章 PyTorch 深度学习框架简介
+## 2. 第2章 PyTorch 深層学習フレームワークの概要
 
-**代码2.1** [PyTorch软件包的导入和测试](./Chapter2/ex_2_1.py)
+**コード2.1** [PyTorch パッケージのインポートとテスト](./Chapter2/ex_2_1.py)
 
-**代码2.2** [安装PyTorch的依赖关系](./Chapter2/ex_2_2.sh)
+**コード2.2** [PyTorch の依存関係のインストール](./Chapter2/ex_2_2.sh)
 
-**代码2.3** [PyTorch编译命令](./Chapter2/ex_2_3.sh)
+**コード2.3** [PyTorch のビルドコマンド](./Chapter2/ex_2_3.sh)
 
-**代码2.4** [Python列表和Numpy数组转换为PyTorch张量](./Chapter2/ex_2_4.py)
+**コード2.4** [Python リストと NumPy 配列を PyTorch テンソルに変換](./Chapter2/ex_2_4.py)
 
-**代码2.5** [指定形状生成张量](./Chapter2/ex_2_5.py)
+**コード2.5** [指定形状のテンソルを生成](./Chapter2/ex_2_5.py)
 
-**代码2.6-2.7** [指定形状生成张量](./Chapter2/ex_2_6.py)
+**コード2.6-2.7** [指定形状のテンソルを生成](./Chapter2/ex_2_6.py)
 
-**代码2.8** [PyTorch在不同设备上的张量](./Chapter2/ex_2_8.py)
+**コード2.8** [異なるデバイス上のテンソル](./Chapter2/ex_2_8.py)
 
-**代码2.9** [PyTorch张量形状相关的一些函数](./Chapter2/ex_2_9.py)
+**コード2.9** [テンソル形状に関する関数](./Chapter2/ex_2_9.py)
 
-**代码2.10** [PyTorch张量的切片和索引](./Chapter2/ex_2_10.py)
+**コード2.10** [テンソルのスライスとインデックス](./Chapter2/ex_2_10.py)
 
-**代码2.11** [PyTorch张量的函数运算](./Chapter2/ex_2_11.py)
+**コード2.11** [テンソルの関数演算](./Chapter2/ex_2_11.py)
 
-**代码2.12** [PyTorch张量的四则运算](./Chapter2/ex_2_12.py)
+**コード2.12** [テンソルの四則演算](./Chapter2/ex_2_12.py)
 
-**代码2.13**  [PyTorch极值和排序的函数](./Chapter2/ex_2_13.py)
+**コード2.13**  [極値とソートの関数](./Chapter2/ex_2_13.py)
 
-**代码2.14**  [PyTorch张量的矩阵乘法运算](./Chapter2/ex_2_14.py)
+**コード2.14**  [テンソルの行列積演算](./Chapter2/ex_2_14.py)
 
-**代码2.15**  [torch.einsum函数的使用](./Chapter2/ex_2_15.py)
+**コード2.15**  [torch.einsum 関数の使用](./Chapter2/ex_2_15.py)
 
-**代码2.16**  [张量的拼接和分割](./Chapter2/ex_2_16.py)
+**コード2.16**  [テンソルの結合と分割](./Chapter2/ex_2_16.py)
 
-**代码2.17**  [张量维度扩增和压缩](./Chapter2/ex_2_17.py)
+**コード2.17**  [テンソル次元の拡張と圧縮](./Chapter2/ex_2_17.py)
 
-**代码2.18**  [张量的广播](./Chapter2/ex_2_18.py)
+**コード2.18**  [テンソルのブロードキャスト](./Chapter2/ex_2_18.py)
 
-**代码2.19** [PyTorch模块类的构建方法](./Chapter2/ex_2_19.py)
+**コード2.19** [PyTorch モジュールクラスの構築方法](./Chapter2/ex_2_19.py)
 
-**代码2.20** [PyTorch线性回归模型示例](./Chapter2/ex_2_20.py)
+**コード2.20** [PyTorch 線形回帰モデルの例](./Chapter2/ex_2_20.py)
 
-**代码2.21** [PyTorch线性回归模型调用方法实例](./Chapter2/ex_2_21.py)
+**コード2.21** [PyTorch 線形回帰モデルの呼び出し例](./Chapter2/ex_2_21.py)
 
-**代码2.22** [PyTorch模块方法调用实例](./Chapter2/ex_2_22.py)
+**コード2.22** [PyTorch モジュールメソッドの呼び出し例](./Chapter2/ex_2_22.py)
 
-**代码2.23** [反向传播函数测试代码](./Chapter2/ex_2_23.py)
+**コード2.23** [逆伝播関数のテストコード](./Chapter2/ex_2_23.py)
 
-**代码2.24** [梯度函数的使用方法](./Chapter2/ex_2_24.py)
+**コード2.24** [勾配関数の使用方法](./Chapter2/ex_2_24.py)
 
-**代码2.25** [控制计算图产生的方法示例](./Chapter2/ex_2_25.py)
+**コード2.25** [計算グラフの生成を制御する方法の例](./Chapter2/ex_2_25.py)
 
-**代码2.26** [损失函数模块的使用方法](./Chapter2/ex_2_26.py)
+**コード2.26** [損失関数モジュールの使用方法](./Chapter2/ex_2_26.py)
 
-**代码2.27** [简单线性回归函数和优化器](./Chapter2/ex_2_27.py)
+**コード2.27** [简单線形回帰関数和オプティマイザ](./Chapter2/ex_2_27.py)
 
-**代码2.28** [PyTorch优化器对不同参数指定不同的学习率](./Chapter2/ex_2_28.py)
+**コード2.28** [PyTorchオプティマイザ对不同パラメータ指定不同的学習率](./Chapter2/ex_2_28.py)
 
-**代码2.29** [PyTorch学习率衰减类示例](./Chapter2/ex_2_29.py)
+**コード2.29** [PyTorch学習率減衰クラス例](./Chapter2/ex_2_29.py)
 
-**代码2.30** [torch.utils.data.DataLoader类的签名](./Chapter2/ex_2_30.py)
+**コード2.30** [torch.utils.data.DataLoaderクラス的シグネチャ](./Chapter2/ex_2_30.py)
 
-**代码2.31** [torch.untils.data.Dataset类的构造方法](./Chapter2/ex_2_31.py)
+**コード2.31** [torch.untils.data.Datasetクラス的コンストラクタ](./Chapter2/ex_2_31.py)
 
-**代码2.32** [简单torch.utils.data.Dataset类的实现](./Chapter2/ex_2_32.py)
+**コード2.32** [简单torch.utils.data.Datasetクラス的实现](./Chapter2/ex_2_32.py)
 
-**代码2.33** [torch.utils.data.IterableDataset类的构造方法](./Chapter2/ex_2_33.py)
+**コード2.33** [torch.utils.data.IterableDatasetクラス的コンストラクタ](./Chapter2/ex_2_33.py)
 
-**代码2.34** [PyTorch保存和载入模型](./Chapter2/ex_2_34.py)
+**コード2.34** [PyTorch保存と読み込みモデル](./Chapter2/ex_2_34.py)
 
-**代码2.35** [PyTorch的状态字典的保存和载入](./Chapter2/ex_2_35.py)
+**コード2.35** [PyTorch的状态辞書的保存と読み込み](./Chapter2/ex_2_35.py)
 
-**代码2.36** [PyTorch检查点的结构](./Chapter2/ex_2_36.py)
+**コード2.36** [PyTorch チェックポイントの構造](./Chapter2/ex_2_36.py)
 
-**代码2.37** [TensorBoard使用方法示例](./Chapter2/ex_2_37.py)
+**コード2.37** [TensorBoard使用方法例](./Chapter2/ex_2_37.py)
 
-**代码2.38** [SummaryWriter提供的添加数据显示的方法](./Chapter2/ex_2_38.py)
+**コード2.38** [SummaryWriter提供的添加データ显示的方法](./Chapter2/ex_2_38.py)
 
-**代码2.39** [torch.nn.DataParallel使用方式](./Chapter2/ex_2_39.py)
+**コード2.39** [torch.nn.DataParallel の使い方](./Chapter2/ex_2_39.py)
 
-**代码2.40** [PyTorch分布式进程启动函数](./Chapter2/ex_2_40.py)
+**コード2.40** [PyTorch分散プロセス启动関数](./Chapter2/ex_2_40.py)
 
-**代码2.41** [多进程训练模型的数据载入](./Chapter2/ex_2_41.py)
+**コード2.41** [多プロセス学習モデル的データ読み込み](./Chapter2/ex_2_41.py)
 
-**代码2.42** [分布式数据并行模型的API](./Chapter2/ex_2_42.py)
+**コード2.42** [分散データ並列モデル的API](./Chapter2/ex_2_42.py)
 
-**代码2.43** [分布式数据并行模型训练时的输出](./Chapter2/ex_2_43.py)
+**コード2.43** [分散データ並列モデル学習时的输出](./Chapter2/ex_2_43.py)
 
-## 3. 第三章 PyTorch 计算机视觉模块
+## 3. 第3章 PyTorch コンピュータビジョンモジュール
 
-**代码3.1-3.3** [线性层的定义和使用方法](./Chapter3/ex_3_1.py)
+**コード3.1-3.3** [線形層の定義と使い方](./Chapter3/ex_3_1.py)
 
-**代码3.4** [ConvNd类的定义代码](./Chapter3/ex_3_4.py)
+**コード3.4** [ConvNd クラスの定義コード](./Chapter3/ex_3_4.py)
 
-**代码3.5-3.9** [归一化层模块的定义](./Chapter3/ex_3_5.py)
+**コード3.5-3.9** [正規化モジュールの定義](./Chapter3/ex_3_5.py)
 
-**代码3.10-3.15** [池化模块的定义](./Chapter3/ex_3_10.py)
+**コード3.10-3.15** [プーリングモジュールの定義](./Chapter3/ex_3_10.py)
 
-**代码3.16** [丢弃层模块的定义](./Chapter3/ex_3_16.py)
+**コード3.16** [ドロップアウト層モジュールの定義](./Chapter3/ex_3_16.py)
 
-**代码3.17** [顺序模块的构造方法](./Chapter3/ex_3_17.py)
+**コード3.17** [順序モジュールのコンストラクタ](./Chapter3/ex_3_17.py)
 
-**代码3.18** [模块列表和模块字典的构造方法](./Chapter3/ex_3_18.py)
+**コード3.18** [ModuleList/ModuleDict のコンストラクタ](./Chapter3/ex_3_18.py)
 
-**代码3.19-3.22** [AlexNet实例及特征提取模块](./Chapter3/ex_3_19.py)
+**コード3.19-3.22** [AlexNet 例と特徴抽出モジュール](./Chapter3/ex_3_19.py)
 
-**代码3.23-3.24** [增益系数的计算和模块参数初始化](./Chapter3/ex_3_23.py)
+**コード3.23-3.24** [ゲイン係数の計算とパラメータ初期化](./Chapter3/ex_3_23.py)
 
-**代码3.25** [InceptionNet的基础框架代码](./Chapter3/ex_3_25.py)
+**コード3.25** [InceptionNet の基本フレーム](./Chapter3/ex_3_25.py)
 
-**代码3.26-3.27** [ResNet的基础框架代码](./Chapter3/ex_3_26.py)
+**コード3.26-3.27** [ResNet の基本フレーム](./Chapter3/ex_3_26.py)
 
-## 4. 第四章 PyTorch 机器视觉案例
+## 4. 第4章 PyTorch コンピュータビジョン事例
 
-**代码4.1** [PyTorch常用的数据集包装类](./Chapter4/ex_4_1.py)
+**コード4.1** [PyTorch の代表的データセットラッパ](./Chapter4/ex_4_1.py)
 
-**代码4.2-4.9** [LeNet模型工程](./Chapter4/LeNet)
+**コード4.2-4.9** [LeNet モデル一式](./Chapter4/LeNet)
 
-**代码4.10-4.12** [使用argparse库指定LeNet神经网络超参数](./Chapter4/ex_4_10.py)
+**コード4.10-4.12** [argparse で LeNet のハイパラ指定](./Chapter4/ex_4_10.py)
 
-**代码4.13** [imagenet.py训练代码数据载入部分](./Chapter4/ex_4_13.py)
+**コード4.13** [ImageNet 読み込み部分](./Chapter4/ex_4_13.py)
 
-**代码4.14** [ResNet瓶颈残差模块的代码实现](./Chapter4/ex_4_14.py)
+**コード4.14** [ResNet ボトルネック残差モジュール](./Chapter4/ex_4_14.py)
 
-**代码4.15-4.20** [InceptionNet子模块的实现](./Chapter4/ex_4_15.py)
+**コード4.15-4.20** [InceptionNet サブモジュール](./Chapter4/ex_4_15.py)
 
-**代码4.21-4.26** [SSD模型的代码实现](./Chapter4/SSD)
+**コード4.21-4.26** [SSD モデル実装](./Chapter4/SSD)
 
-**代码4.27-4.30** [FCN模型的代码实现](./Chapter4/fcn.py)
+**コード4.27-4.30** [FCN モデル実装](./Chapter4/fcn.py)
 
-**代码4.31** [U-Net模型的代码实现](./Chapter4/unet.py)
+**コード4.31** [U-Net モデル実装](./Chapter4/unet.py)
 
-**代码4.32-4.37** [图像风格迁移代码](./Chapter4/style_transfer.py)
+**コード4.32-4.37** [画像スタイル転送](./Chapter4/style_transfer.py)
 
-**代码4.38-4.39** [变分自编码器（VAE）代码实现](./Chapter4/vae.py)
+**コード4.38-4.39** [変分オートエンコーダ（VAE）](./Chapter4/vae.py)
 
-**代码4.40-4.42** [生成对抗网络（GAN）代码实现](./Chapter4/gan.py)
+**コード4.40-4.42** [敵対的生成ネットワーク（GAN）](./Chapter4/gan.py)
 
-## 5. 第五章 PyTorch 自然语言处理模块
+## 5. 第5章 PyTorch 自然言語処理モジュール
 
-**代码5.1** [使用sklearn的CountVectorizer来提取词频特征](./Chapter5/ex_5_1.py)
+**コード5.1** [sklearn CountVectorizer で語頻度特徴](./Chapter5/ex_5_1.py)
 
-**代码5.2** [CountVectorizer类声明](./Chapter5/ex_5_2.py)
+**コード5.2** [CountVectorizer クラス定義](./Chapter5/ex_5_2.py)
 
-**代码5.3** [TF-IDF代码实例](./Chapter5/ex_5_3.py)
+**コード5.3** [TF-IDF の例](./Chapter5/ex_5_3.py)
 
-**代码5.4** [TfidfTransformer和TfidfVectorizer类的声明](./Chapter5/ex_5_4.py)
+**コード5.4** [TfidfTransformer / TfidfVectorizer 定義](./Chapter5/ex_5_4.py)
 
-**代码5.5** [nn.Embedding类的定义](./Chapter5/ex_5_5.py)
+**コード5.5** [nn.Embedding クラス定義](./Chapter5/ex_5_5.py)
 
-**代码5.6** [词嵌入模块的使用示例](./Chapter5/ex_5_6.py)
+**コード5.6** [単語埋め込みモジュールの使用例](./Chapter5/ex_5_6.py)
 
-**代码5.7** [从预训练的词嵌入矩阵得到词嵌入模块](./Chapter5/ex_5_7.py)
+**コード5.7** [事前学習埋め込み行列からの初期化](./Chapter5/ex_5_7.py)
 
-**代码5.8** [nn.EmbeddingBag类的定义](./Chapter5/ex_5_8.py)
+**コード5.8** [nn.EmbeddingBag クラス定義](./Chapter5/ex_5_8.py)
 
-**代码5.9-5.10** [pack_padded_sequence和pad_packed_sequence的使用](./Chapter5/ex_5_9.py)
+**コード5.9-5.10** [pack_padded_sequence などの使用](./Chapter5/ex_5_9.py)
 
-**代码5.11** [简单RNN的参数代码](./Chapter5/ex_5_11.py)
+**コード5.11** [単純 RNN のパラメータ例](./Chapter5/ex_5_11.py)
 
-**代码5.12** [RNN代码使用实例](./Chapter5/ex_5_12.py)
+**コード5.12** [RNN 使用例](./Chapter5/ex_5_12.py)
 
-**代码5.13** [LSTM和GRU的参数定义](./Chapter5/ex_5_13.py)
+**コード5.13** [LSTM/GRU のパラメータ定義](./Chapter5/ex_5_13.py)
 
-**代码5.14** [LSTM和GRU模块的使用方法](./Chapter5/ex_5_14.py)
+**コード5.14** [LSTM/GRU モジュールの使い方](./Chapter5/ex_5_14.py)
 
-**代码5.15** [RNNCell、LSTMCell和GRUCell参数定义](./Chapter5/ex_5_15.py)
+**コード5.15** [RNNCell/LSTMCell/GRUCell のパラメータ](./Chapter5/ex_5_15.py)
 
-**代码5.16** [RNNCell、LSTMCell和GRUCell的使用方法](./Chapter5/ex_5_16.py)
+**コード5.16** [RNNCell/LSTMCell/GRUCell の使い方](./Chapter5/ex_5_16.py)
 
-**代码5.17** [MultiheadAttention模块参数定义](./Chapter5/ex_5_17.py)
+**コード5.17** [MultiheadAttention のパラメータ](./Chapter5/ex_5_17.py)
 
-**代码5.18** [Transformer单层编码器和解码器模块定义](./Chapter5/ex_5_18.py)
+**コード5.18** [Transformer エンコーダ/デコーダの定義](./Chapter5/ex_5_18.py)
 
-**代码5.19** [Transformer编码器、解码器和Transformer模型](./Chapter5/ex_5_19.py)
+**コード5.19** [Transformer エンコーダ/デコーダ/モデル](./Chapter5/ex_5_19.py)
 
-## 6. 第六章 PyTorch 自然语言处理案例
+## 6. 第6章 PyTorch 自然言語処理の事例
 
-**代码6.1** [使用collections.Counter类构建单词表](./Chapter6/ex_6_1.py)
+**コード6.1** [collections.Counter で語彙表を構築](./Chapter6/ex_6_1.py)
 
-**代码6.2-6.3** [CBOW模型及其训练过程](./Chapter6/word2vec.py)
+**コード6.2-6.3** [CBOW モデルと学習過程](./Chapter6/word2vec.py)
 
-**代码6.4** [PyTorch余弦相似度的模块的参数定义和使用](./Chapter6/ex_6_4.py)
+**コード6.4** [CosineSimilarity のパラメータと使用](./Chapter6/ex_6_4.py)
 
-**代码6.5-6.6** [用于情感分析的深度学习模型代码](./Chapter6/sentiment.py)
+**コード6.5-6.6** [感情分析向け深層学習モデル](./Chapter6/sentiment.py)
 
-**代码6.7-6.9** [基于循环神经网络的语言模型代码](./Chapter6/lm.py)
+**コード6.7-6.9** [RNN ベース言語モデル](./Chapter6/lm.py)
 
-**代码6.10-6.12** [Seq2Seq模型代码](./Chapter6/seq2seq.py)
+**コード6.10-6.12** [Seq2Seqモデルコード](./Chapter6/seq2seq.py)
 
-**代码6.13-6.16** [BERT模型代码](./Chapter6/bert.py)
+**コード6.13-6.16** [BERTモデルコード](./Chapter6/bert.py)
 
-## 第七章 其他重要模型
+## 7. 第7章 その他の重要モデル
 
-**代码7.1** [宽深模型代码](./Chapter7/wide_deep.py)
+**コード7.1** [Wide & Deep モデル](./Chapter7/wide_deep.py)
 
-**代码7.2** [CTC损失函数的定义](./Chapter7/ex_7_2.py)
+**コード7.2** [CTC 損失関数の定義](./Chapter7/ex_7_2.py)
 
-**代码7.3** [DeepSpeech模型代码](./Chapter7/deep_speech.py)
+**コード7.3** [DeepSpeechモデルコード](./Chapter7/deep_speech.py)
 
-**代码7.4-7.7** [Tacotron模型代码](./Chapter7/tacotron.py)
+**コード7.4-7.7** [Tacotronモデルコード](./Chapter7/tacotron.py)
 
-**代码7.8-7.9** [WaveNet模型代码](./Chapter7/wavenet.py)
+**コード7.8-7.9** [WaveNetモデルコード](./Chapter7/wavenet.py)
 
-**代码7.10-7.14** [DQN模型代码](./Chapter7/dqn.py)
+**コード7.10-7.14** [DQNモデルコード](./Chapter7/dqn.py)
 
-**代码7.15-7.17** [半精度模型的训练](./Chapter7/half_prec.py)
+**コード7.15-7.17** [半精度モデルの学習](./Chapter7/half_prec.py)
 
-## 第八章 PyTorch 高级应用
+## 8. 第8章 PyTorch 応用
 
-**代码8.1-8.10** [PyTorch自定义激活函数和梯度](./Chapter8/GELU)
+**コード8.1-8.10** [PyTorch のカスタム活性化関数/勾配](./Chapter8/GELU)
 
-**代码8.11-8.14** [PyTorch钩子使用方法示例](./Chapter8/ex_8_11.py)
+**コード8.11-8.14** [PyTorch フックの使い方](./Chapter8/ex_8_11.py)
 
-**代码8.15-8.17** [PyTorch静态图使用方法示例](./Chapter8/ex_8_15.py)
+**コード8.15-8.17** [PyTorch 静的グラフの使い方](./Chapter8/ex_8_15.py)
 
-**代码8.18-8.22** [PyTorch静态模型的保存和载入](./Chapter8/ex_8_18)
+**コード8.18-8.22** [PyTorch 静的モデルの保存と読み込み](./Chapter8/ex_8_18)
 
-## 第九章 PyTorch 源代码解析 
+## 9. 第9章 PyTorch ソースコード解析 
 
-**代码9.1** [native_functions.yaml文件的声明](./ex_9_1.yaml)
+**コード9.1** [native_functions.yaml の宣言](./ex_9_1.yaml)
 
-**代码9.2-9.4** [pybind11的简单例子](./py_cpp_interface)
+**コード9.2-9.4** [pybind11 の簡単な例](./py_cpp_interface)

@@ -1,25 +1,25 @@
-""" 为了能够现实下列代码的执行效果，请在安装PyTorch之后，在Python交互命令行界面，
-    即在系统命令行下输入python这个命令回车后，在>>>提示符后执行下列代码
-    （#号及其后面内容为注释，可以忽略）
+""" 以下のコードの実行結果を再現するには、PyTorch をインストールした後、
+    システムのコマンドラインで `python` を実行して対話モードに入り、>>> プロンプトで次のコードを入力してください。
+    （# 以降はコメントのため無視して構いません）
 """
 
 import torch
 
-mse = nn.MSELoss() # 初始化平方损失函数模块
-t1 = torch.randn(5, requires_grad=True) # 随机生成张量t1
-t2 = torch.randn(5, requires_grad=True) # 随机生成张量t2
-mse(t1, t2) # 计算张量t1和t2之间的平方损失函数
-t1 = torch.randn(5, requires_grad=True) # 随机生成张量t1
+mse = nn.MSELoss() # 平方誤差損失を初期化
+t1 = torch.randn(5, requires_grad=True) # テンソル t1 をランダム生成
+t2 = torch.randn(5, requires_grad=True) # テンソル t2 をランダム生成
+mse(t1, t2) # t1 と t2 の二乗誤差損失を計算
+t1 = torch.randn(5, requires_grad=True) # テンソル t1 をランダム生成
 t1s = torch.sigmoid(t1)
-t2 = torch.randint(0, 2, (5, )).float() # 随机生成0，1的整数序列，并转换为浮点数
-bce(t1s, t2) # 计算二分类的交叉熵
-bce_logits = nn.BCEWithLogitsLoss() # 使用交叉熵对数损失函数
-bce_logits(t1, t2) # 计算二分类的交叉熵，可以发现和前面的结果一致
-N=10 # 定义分类数目
-t1 = torch.randn(5, N, requires_grad=True) # 随机产生预测张量
-t2 = torch.randint(0, N, (5, )) # 随机产生目标张量
-t1s = torch.nn.functional.log_softmax(t1, -1) # 计算预测张量的LogSoftmax
-nll = nn.NLLLoss() # 定义NLL损失函数
-nll(t1s, t2) # 计算损失函数
-ce = nn.CrossEntropyLoss() # 定义交叉熵损失函数
-ce(t1, t2) # 计算损失函数，可以发现和NLL损失函数的结果一致
+t2 = torch.randint(0, 2, (5, )).float() # 0/1 の整数列を生成し float に変換
+bce(t1s, t2) # 2クラスの交差エントロピーを計算
+bce_logits = nn.BCEWithLogitsLoss() # ロジット版 BCE 損失
+bce_logits(t1, t2) # 交差エントロピー（前と一致）
+N=10 # クラス数
+t1 = torch.randn(5, N, requires_grad=True) # 予測テンソルを生成
+t2 = torch.randint(0, N, (5, )) # 目標テンソルを生成
+t1s = torch.nn.functional.log_softmax(t1, -1) # 予測の LogSoftmax
+nll = nn.NLLLoss() # NLL 損失
+nll(t1s, t2) # 損失を計算
+ce = nn.CrossEntropyLoss() # 交差エントロピー損失
+ce(t1, t2) # NLL と一致する結果

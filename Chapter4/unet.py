@@ -1,4 +1,4 @@
-""" 该代码改编自以下Repo：
+""" このコードは以下のリポジトリを基に改変：
     https://github.com/mateuszbuda/brain-segmentation-pytorch
 """
 

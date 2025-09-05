@@ -1,18 +1,18 @@
-""" 该代码定义了LeNet模型的训练过程
+""" 本コードは LeNet モデルの学習過程を定義します。
 """
 
 import torch
 import torch.nn as nn
 from model import LeNet
 
-# ... 此处略去定义训练数据载入器的代码，具体可参考代码4.3
+# ... 学習用データローダの定義は省略（詳細はコード 4.3 を参照）
 
-model = LeNet() # 定义LeNet模型
-model.train() # 切换模型到训练状态
-lr = 0.01 # 定义学习率
-criterion = nn.CrossEntropyLoss() # 定义损失函数
+model = LeNet() # LeNet モデルを定義
+model.train() # 学習モードへ切り替え
+lr = 0.01 # 学習率
+criterion = nn.CrossEntropyLoss() # 損失関数
 optimizer = optim.SGD(model.parameters(), lr=lr, momentum=0.9, 
-    weight_decay=5e-4) # 定义随机梯度下降优化器
+    weight_decay=5e-4) # SGD オプティマイザ
 
 train_loss = 0
 correct = 0

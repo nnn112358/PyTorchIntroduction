@@ -1,4 +1,4 @@
-""" 本代码金威示例代码，演示如何使用PyTorch的学习率衰减功能
+""" 本コードはサンプルで、PyTorch の学習率減衰の使い方を示す。
 """
 
 scheduler = StepLR(optimizer, step_size=30, gamma=0.1)

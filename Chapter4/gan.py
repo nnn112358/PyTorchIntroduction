@@ -1,10 +1,10 @@
-""" 以下代码仅作为DC-GAN模型的实现参考
+""" 本コードは DC-GAN 実装の参考例です。
 """
 
 import torch
 import torch.nn as nn
 
-#  生成器的定义
+#  生成器の定義
 class Generator(nn.Module):
     def __init__(self, nz, ngf):
         super(Generator, self).__init__()
@@ -34,7 +34,7 @@ class Generator(nn.Module):
         output = self.main(input)
         return output
 
-# 判别器的定义
+# 識別器（Discriminator）の定義
 class Discriminator(nn.Module):
     def __init__(self, nc, ndf):
         super(Discriminator, self).__init__()
@@ -64,11 +64,11 @@ class Discriminator(nn.Module):
         output = self.main(input)
         return output.view(-1, 1).squeeze(1)
 
-# DCGAN的训练代码
+# DCGAN の学習コード
 
 def train():
-    # nz: 隐含变量的维度
-    # ngf, ncf: 生成器和判别器的特征维度
+    # nz: 潜在変数の次元
+    # ngf, ncf: 生成器/識別器の特徴次元
     netG = Generator(nz, ngf).to(device)
     netD = Discriminator(nc, ndf).to(device)
     criterion = nn.BCELoss()
@@ -76,43 +76,42 @@ def train():
         betas=(opt.beta1, 0.999))
     optimizerG = optim.Adam(netG.parameters(), lr=opt.lr,
         betas=(opt.beta1, 0.999))
-    real_label = 1 # 真实图像标签
-    fake_label = 0 # 生成图像标签
+    real_label = 1 # 実画像のラベル
+    fake_label = 0 # 生成画像のラベル
     for epoch in range(opt.niter):
         for i, data in enumerate(dataloader, 0):
-            # 判别器梯度置为0
+            # 識別器の勾配を 0 に
             netD.zero_grad()
             real_cpu = data[0].to(device)
             batch_size = real_cpu.size(0)
-            # 定义输入数据
+            # 入力データを定義
             label = torch.full((batch_size,), real_label, device=device)
             output = netD(real_cpu)
-            # 定义判别器相对于真实图像损失函数
+            # 実画像に対する識別器の損失
             errD_real = criterion(output, label)
-            # 梯度反向传播，相对于真实图像
+            # 実画像に対して逆伝播
             errD_real.backward()
             noise = torch.randn(batch_size, nz, 1, 1, device=device)
             fake = netG(noise)
             label.fill_(fake_label)
             output = netD(fake.detach())
-            # 定义判别器相对于生成图像损失函数
+            # 生成画像に対する識別器の損失
             errD_fake = criterion(output, label)
-            # 梯度反向传播，相对于生成图像
+            # 生成画像に対して逆伝播
             errD_fake.backward()
-            # 计算判别器总的损失函数：真实图像损失函数+生成图像损失函数
+            # 識別器の総損失＝実画像損失＋生成画像損失
             errD = errD_real + errD_fake
-            # 优化判别器
+            # 識別器を最適化
             optimizerD.step()        
     
-            # 生成器梯度置为0
+            # 生成器の勾配を 0 に
             netG.zero_grad()
-            # 注意这里是real_label，相对于前面fake_label
+            # ここでは real_label（前段は fake_label）
             label.fill_(real_label)
             output = netD(fake)
-            # 定义判别器相对于真实图像损失函数
+            # 実画像に対する識別器の損失
             errG = criterion(output, label)
-            # 梯度反向传播，相对于生成器
+            # 生成器に対して逆伝播
             errG.backward()
-            # 优化生成器
+            # 生成器を最適化
             optimizerG.step()
-

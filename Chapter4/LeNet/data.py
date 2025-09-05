@@ -1,4 +1,4 @@
-""" 该代码用于LeNet的训练数据集MNIST的载入
+""" 本コードは LeNet 用学習データセット MNIST の読み込みです。
 """
 
 from torchvision.datasets import MNIST

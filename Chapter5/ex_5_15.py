@@ -1,4 +1,4 @@
-""" 该代码仅为演示函数签名和所用方法，并不能实际运行
+""" このコードは関数のシグネチャと使用方法を示すためのサンプルで、実行は想定していません
 """
 
 class torch.nn.RNNCell(input_size, hidden_size, bias=True,

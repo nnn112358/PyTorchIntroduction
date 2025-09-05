@@ -1,6 +1,7 @@
-""" 为了能够现实下列代码的执行效果，请在安装PyTorch和Scikit-Learn之后，在Python交互命令行界面，
-    即在系统命令行下输入python这个命令回车后，在>>>提示符后执行下列代码
-    （#号及其后面内容为注释，可以忽略）
+""" 以下のコードの実行結果を再現するには、PyTorch と Scikit-Learn を
+    インストールした後、システムのコマンドラインで `python` を実行して
+    対話モードに入り、>>> プロンプトで次のコードを入力してください。
+    （# 以降はコメントのため無視して構いません）
 """
 
 from sklearn.feature_extraction.text import CountVectorizer

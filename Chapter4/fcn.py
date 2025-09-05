@@ -1,8 +1,8 @@
-""" 该代码改编自PyTorch官网torchvision源代码 
+""" このコードは PyTorch 公式の torchvision ソースを基に改変 
     https://github.com/pytorch/vision/blob/master/torchvision/models/segmentation/fcn.py
 """
 
-# FCN特征提取部分
+# FCN 特徴抽出部
 def _segm_resnet(name, backbone_name, num_classes, aux,
     pretrained_backbone=True):
     
@@ -31,7 +31,7 @@ def _segm_resnet(name, backbone_name, num_classes, aux,
     model = base_model(backbone, classifier, aux_classifier)
     return model
 
-# FCN模块部分
+# FCN モジュール部
 class FCN(_SimpleSegmentationModel):
     pass
 
@@ -62,7 +62,7 @@ class _SimpleSegmentationModel(nn.Module):
 
         return result
 
-# FCNHead部分
+# FCNHead 部分
 class FCNHead(nn.Sequential):
     def __init__(self, in_channels, channels):
         inter_channels = in_channels // 4
@@ -77,7 +77,7 @@ class FCNHead(nn.Sequential):
 
         super(FCNHead, self).__init__(*layers)
 
-# FCN输入图像预处理
+# FCN 入力画像の前処理
 def get_transform(train):
     base_size = 520
     crop_size = 480

@@ -1,7 +1,7 @@
-""" 以下代码仅作为模型构建的演示代码
+""" 本コードはモデル構築のデモとしての参考例です。
 """
 
-# VAE模型的定义
+# VAE モデルの定義
 class VAE(nn.Module):
     def __init__(self):
         super(VAE, self).__init__()
@@ -30,7 +30,7 @@ class VAE(nn.Module):
         z = self.reparameterize(mu, logvar)
         return self.decode(z), mu, logvar
 
-# VAE模型的损失函数
+# VAE モデルの損失関数
 def loss_function(recon_x, x, mu, logvar):
 
     BCE = F.binary_cross_entropy(recon_x, x.view(-1, 784), reduction='sum')

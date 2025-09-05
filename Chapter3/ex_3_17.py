@@ -1,10 +1,10 @@
-""" 本文件中的代码可以通过使用命令 python ex_3_17.py 运行  
-   （#号及其后面内容为注释，可以忽略）
+""" このファイルのコードは `python ex_3_17.py` で実行できます。
+   （# 以降はコメントのため無視して構いません）
 """
 
 import torch.nn as nn
 
-# 情况1. 使用参数来构建顺序模型
+# パターン1: 引数で順序モジュールを構築
 model = nn.Sequential(
           nn.Conv2d(1,20,5),
           nn.ReLU(),
@@ -14,7 +14,7 @@ model = nn.Sequential(
 
 print(model)
 
-# 情况2. 使用顺序字典来构建顺序模型
+# パターン2: OrderedDict で順序モジュールを構築
 model = nn.Sequential(OrderedDict([
           ('conv1', nn.Conv2d(1,20,5)),
           ('relu1', nn.ReLU()),
